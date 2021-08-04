@@ -1,0 +1,6 @@
+Press h for help.
+Press + to zoom in and - to zoomout. Use arrow keys to scroll.
+Use mouse to scroll and zoom. 
+Press q to quit.
+Press c to hide this help.
+Press p to print the image to file.
