@@ -3,6 +3,7 @@
 Wiki link about the MandelBrot set-
 https://en.wikipedia.org/wiki/Mandelbrot_set
 
+ <img src="data/MandelBrot2021-08-04_14-22-03.jpg"/>
 
 
 
@@ -71,7 +72,7 @@ A README with instructions is included with the project.
 	
 ### Loops,Functions,I/O →
 
-**The project reads data from a file and process the data, or the program writes data to a file.**
+**1)The project reads data from a file and process the data, or the program writes data to a file.**
 
     The project reads help file from /data folder and creates a transparent cv::mat object to overlay the help info on the Mandelbrot image.
     Ref. 
@@ -84,7 +85,7 @@ A README with instructions is included with the project.
     void MandelBrot::saveImageToFile()
 
 
-**The project accepts user input and processes the input.** 
+**2)The project accepts user input and processes the input.** 
     
     The UI function is started in it’s own thread and process the keyboard user input to zoom and scroll the image and various other functions.
     MandelBrot.cpp line no 121
@@ -94,14 +95,15 @@ A README with instructions is included with the project.
 ### Concurrency →
 
 
-**The project uses multithreading.**
+**3)The project uses multithreading.**
 
-	Multithreading is used throughout this project. The main thread creates the Mandelbrot object. The OpenCV mouse callback functions are handled in the main thread. The MandelBrot constructor will start two other threads , one for the UserInterface and WaitForImage. Please refer below Detailed Project Description.
+	Multithreading is used throughout this project. The main thread creates the Mandelbrot object. The OpenCV mouse callback functions are handled in the main thread. The MandelBrot constructor will start two other threads , one for the UserInterface and other for WaitForImage. Please refer below Detailed Project Description.
     Also there in another Render thread created which will do the heavy MandelBrot computations in background and queue the generated images to the WaitForImage thread.
 
 
-**A mutex or lock is used in the project.**
-**A condition variable is used in the project.**
+**4)A mutex or lock is used in the project.**
+
+**5)A condition variable is used in the project.**
 
     The above two rubric items are addressed in few of different locations.
     There a code reuse of the message queue class created in the Program a Concurrent Traffic Simulation. 
@@ -154,6 +156,9 @@ This thread will continuously iterate the MandelBrot calculations to create the 
     
 After calculations are complete this thread will sleep on ` _condition.wait(uLock)` , and can be restarted by `void Render::RenderMandelBrot()` to restart the calculations or `Render::~Render()` and `void Render::abortRender()` to   
 abort and return.
+The core computation algorithm and colormap calculation algorithm are copied over from QT Mandlebrot example project.
+
+
 
 
 
